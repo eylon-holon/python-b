@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Button</title>
+    <style>
+        .big-button {
+            font-size: 24px;
+            padding: 20px 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+        }
+        .big-button:hover {
+            background-color: #0056b3;
+        }
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            border-left-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <button class="big-button" onclick="handleClick()">
+        <span id="button-text">Get login code</span>
+        <div class="spinner" id="spinner"></div>
+    </button>
+    <script>
+        function handleClick() {
+            const spinner = document.getElementById('spinner');
+            const buttonText = document.getElementById('button-text');
+            spinner.style.display = 'inline-block';
+            buttonText.textContent = 'Working...';
+            
+            fetch('https://script.google.com/macros/s/AKfycbz28au8P_ST2CyqvNgAHhn_sioyv7bcdUzJhZ9YOYAz2rPKoeqVDAxT9SEjuvb1GFKD/exec')
+                .then(response => response.json())
+                .then(data => {
+                })
+                .catch(error => {
+                })
+                .finally(() => {
+                    spinner.style.display = 'none';
+                    buttonText.textContent = 'Get login code';
+                });
+        }
+    </script>
+</body>
+</html>
